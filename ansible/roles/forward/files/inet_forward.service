@@ -1,0 +1,10 @@
+[Unit]
+Description=Forwards internet from wifi to ethernet on raspberry pi
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/inet_forward.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,45 @@
+- name: install necessary packages for openvpn
+  apt:
+    pkg: 
+    - isc-dhcp-server
+    state: present
+    update_cache: true
+  tags:
+  - install
+
+- name: copy dhcp config
+  copy:
+    src: dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+  tags: 
+  - install
+
+- name: start dhcp server
+  systemd:
+    state: restarted
+    name: isc-dhcp-server
+    enabled: true
+  tags:
+  - install
+
+- name: copy forward script file
+  copy:
+    src: inet_forward.sh
+    dest: /usr/local/bin/inet_forward.sh
+    mode: 0755
+  tags: 
+  - install
+
+- name: copy forward service file
+  copy:
+    src: inet_forward.service
+    dest: /etc/systemd/system/inet_forward.service
+
+- name: start forward service
+  systemd:
+    daemon_reload: true
+    state: restarted
+    name: inet_forward
+    enabled: true
+  tags:
+  - install
