@@ -9,7 +9,7 @@ sudo ./setup.sh
 This will install a service that executes the inet_forward.sh script at boot after the network is available. That script will forward all ports to 192.168.34.10 which is the device connected to ethernet.
 
 ## Ansible
-The ansible directory was added to include the same script to install the forward service over ssh.  
+The ansible directory was added to include the same script to install the forward service over ssh.  Please update the `ansible/ansible_hosts` file with the IP needed.
 To install run the following:  
 ```bash
 cd ansible
